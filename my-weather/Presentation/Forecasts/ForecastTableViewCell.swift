@@ -10,13 +10,13 @@ import UIKit
 class ForecastTableViewCell: UITableViewCell {
 
     @IBOutlet
-    private var dateLabel: UILabel!
+    var dateLabel: UILabel!
     
     @IBOutlet
-    private var weatherEmojiLabel: UILabel!
+    var weatherEmojiLabel: UILabel!
     
     @IBOutlet
-    private var weatherNameLabel: UILabel!
+    var weatherNameLabel: UILabel!
     
     private func setup() {
         // TODO: Set labels fonts, colors... etc.
