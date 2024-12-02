@@ -55,6 +55,8 @@ extension WeatherCode {
         case .thunderstorm:                 return "🌩️"
         case .thunderstormWithHail:         return "🌩️"
         case .thunderstormWithHeavyHail:    return "🌩️"
+            
+        case .unknown:                      return "?"
         }
     }
     
@@ -98,6 +100,8 @@ extension WeatherCode {
         case .thunderstorm:                 return "Thunderstorm"
         case .thunderstormWithHail:         return "Thunderstorm With Hail"
         case .thunderstormWithHeavyHail:    return "Thunderstorm With Heavy Hail"
+            
+        case .unknown:                      return "Unknown"
         }
     }
     

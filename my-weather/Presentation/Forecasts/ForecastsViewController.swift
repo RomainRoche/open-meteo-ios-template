@@ -29,15 +29,30 @@ final class ForecastsViewController: UIViewController {
     /// The use case to use to fetch forecasts data.
 //    private let getForecast: GetForecastUseCase // TODO: Implement this
     
+    private let weatherRepository = WeatherAPIRepository()
+    
+    private var weatherPoints: [WeatherPoint] = []
+    
     /// Get the weather's forecasts.
     private func getForecasts() async {
-        // TODO: Implement this
+        do {
+            let weatherPoints = try await weatherRepository.getForecast(
+                latitude: 48.86,
+                longitude: 2.35
+            )
+            self.weatherPoints = weatherPoints
+            self.forecastsTableView.reloadData()
+        } catch {
+            print(error)
+        }
     }
     
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        self.refreshButton.setTitle("Refresh", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +71,16 @@ final class ForecastsViewController: UIViewController {
         super.viewDidDisappear(animated)
     }
     
+    // MARK: - Setup
+    
+    private func setup() {
+        setupTableView()
+    }
+    
+    private func setupTableView() {
+        forecastsTableView.dataSource = self
+    }
+    
     // MARK: - Button action
     
     @IBAction
@@ -65,4 +90,36 @@ final class ForecastsViewController: UIViewController {
         }
     }
 
+}
+
+extension ForecastsViewController: UITableViewDataSource {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        return self.weatherPoints.count
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "ForecastTableViewCell",
+            for: indexPath
+        )
+        
+        switch cell {
+        case let cell as ForecastTableViewCell:
+            let point = weatherPoints[indexPath.row]
+            cell.weatherEmojiLabel.text = point.weather.emoji
+            cell.dateLabel.text = dateFormatter.string(from: point.date)
+            cell.weatherNameLabel.text = point.weather.title
+        default:
+            break
+        }
+        
+        return cell
+    }
+    
 }

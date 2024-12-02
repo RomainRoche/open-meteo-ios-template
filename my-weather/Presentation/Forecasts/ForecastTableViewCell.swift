@@ -13,7 +13,7 @@ class ForecastTableViewCell: UITableViewCell {
     private var dateLabel: UILabel!
     
     @IBOutlet
-    private var weatherLabel: UILabel!
+    private var weatherEmojiLabel: UILabel!
     
     @IBOutlet
     private var weatherNameLabel: UILabel!
@@ -47,7 +47,7 @@ class ForecastTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         dateLabel.text = nil
-        weatherLabel.text = nil
+        weatherEmojiLabel.text = nil
         weatherNameLabel.text = nil
     }
 

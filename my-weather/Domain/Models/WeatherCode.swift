@@ -47,4 +47,6 @@ public enum WeatherCode: Int {
     
     case thunderstormWithHail = 96
     case thunderstormWithHeavyHail = 99
+    
+    case unknown = -1
 }
