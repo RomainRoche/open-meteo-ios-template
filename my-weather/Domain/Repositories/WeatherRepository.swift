@@ -14,4 +14,14 @@ public protocol WeatherRepository {
     /// - Parameter longitude: The longitude.
     /// - Returns: An array of `WeatherPoint`.
     func getForecast(latitude: Double, longitude: Double) async throws -> [WeatherPoint]
+    
+    /// Save some forecasts
+    /// - Parameter forecasts: The forecasts to save
+    /// - Parameter latitude: The latitude coordinates
+    /// - Parameter longitude: The longitude coordinates
+    func saveForecasts(
+        _ forecasts: [WeatherPoint],
+        forLatitude latitude: Double,
+        longitude: Double
+    ) async throws
 }

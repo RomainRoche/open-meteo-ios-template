@@ -29,21 +29,39 @@ final class ForecastsViewController: UIViewController {
     /// The use case to use to fetch forecasts data.
 //    private let getForecast: GetForecastUseCase // TODO: Implement this
     
-    private let weatherRepository = WeatherAPIRepository()
+    private let weatherAPIRepository = WeatherAPIRepository()
+    private let weatherDBRepository = WeatherDBRepository(
+        persistentContainer: UIApplication.appDelegate.persistentContainer
+    )
     
     private var weatherPoints: [WeatherPoint] = []
     
     /// Get the weather's forecasts.
     private func getForecasts() async {
+        let latitude: Double = 48.86
+        let longitude: Double = 2.35
+        
         do {
-            let weatherPoints = try await weatherRepository.getForecast(
-                latitude: 48.86,
-                longitude: 2.35
+            let weatherPoints = try await weatherAPIRepository.getForecast(
+                latitude: latitude,
+                longitude: longitude
             )
             self.weatherPoints = weatherPoints
+            
+            try? await self.weatherDBRepository.saveForecasts(
+                weatherPoints,
+                forLatitude: latitude,
+                longitude: longitude
+            )
+            
             self.forecastsTableView.reloadData()
         } catch {
-            print(error)
+            let localPoints = try? await self.weatherDBRepository.getForecast(
+                latitude: latitude,
+                longitude: longitude
+            )
+            self.weatherPoints = localPoints ?? []
+            self.forecastsTableView.reloadData()
         }
     }
     

@@ -38,4 +38,12 @@ final class WeatherAPIRepository: WeatherRepository {
         return results
     }
     
+    func saveForecasts(
+        _ forecasts: [WeatherPoint],
+        forLatitude latitude: Double,
+        longitude: Double
+    ) async throws {
+        // do nothing
+    }
+    
 }
