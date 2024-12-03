@@ -24,4 +24,24 @@ public protocol GetLocationUseCase {
 
 // MARK: - Base implementation
 
+final class GetLocation: GetLocationUseCase {
+    let locationRepository: LocationRepository
+    
+    init(locationRepository: any LocationRepository) {
+        self.locationRepository = locationRepository
+    }
+    
+    func execute() async -> Result<Coordinates, LocationError> {
+        return await withCheckedContinuation { continuation in
+            locationRepository.fetchLocation { result in
+                continuation.resume(returning: result)
+            }
+        }
+    }
+    
+    
+    
+    
+}
+
 // TODO: Create implementation

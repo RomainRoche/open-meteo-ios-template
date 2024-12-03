@@ -24,36 +24,23 @@ final class ForecastsViewController: UIViewController {
     // MARK: - Forecasts management
     
     /// The use case for location
-//    private let getLocation: GetLocationUseCase // TODO: Implement this
+    private let getLocation: GetLocationUseCase = GetLocation(  // ! Should be injected
+        locationRepository: CoreLocationRepository()
+    )
     
     /// The use case to use to fetch forecasts data.
-//    private let getForecast: GetForecastUseCase // TODO: Implement this
-    
-    private let weatherRepository = WeatherAPIRepository()
-    private let locationRepository = CoreLocationRepository()
-    
-    private var appDelegate: AppDelegate? {
-        UIApplication.shared.delegate as? AppDelegate
-    }
-    
+    private let getForecast: GetForecastUseCase = GetForecast(  // ! Should be injected
+        weatherRepository: WeatherAPIRepository()
+    )
+        
     private var weatherPoints: [WeatherPoint] = []
-    
-    private func getLocation() async -> Result<Coordinates, LocationError> {
-        return await withCheckedContinuation { continuation in
-            locationRepository.fetchLocation { result in
-                continuation.resume(returning: result)
-            }
-        }
-    }
-    
+        
     /// Get the weather's forecasts.
     private func getForecasts() async {
         do {
-            let coordinates = try await getLocation().get()
-            let weatherPoints = try await weatherRepository.getForecast(
-                latitude: coordinates.latitude,
-                longitude: coordinates.longitude
-            )
+            // .get(): returns result if Result is a success, otherwise throw error
+            let coordinates = try await getLocation.execute().get()
+            let weatherPoints = try await getForecast.execute(for: coordinates).get()
             self.weatherPoints = weatherPoints
             self.forecastsTableView.reloadData()
         } catch {
