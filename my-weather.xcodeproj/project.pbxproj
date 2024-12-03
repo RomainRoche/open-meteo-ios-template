@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7A2253FE2CFF1FE200C6CA56 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 7A2253FD2CFF1FE200C6CA56 /* Swinject */; };
+		7A2254052CFF211500C6CA56 /* Swinject-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7A2254022CFF211500C6CA56 /* Swinject-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		7A8F7A9D2CE0B63200B127BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -22,6 +27,20 @@
 			remoteInfo = "weather-outfit";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7A2254042CFF211500C6CA56 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A2254052CFF211500C6CA56 /* Swinject-Dynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7A8F7A832CE0B63000B127BD /* my-weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "my-weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A2253FE2CFF1FE200C6CA56 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,12 +105,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A2254012CFF211500C6CA56 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7A8F7A7A2CE0B63000B127BD = {
 			isa = PBXGroup;
 			children = (
 				7A8F7A852CE0B63000B127BD /* my-weather */,
 				7A8F7A9F2CE0B63200B127BD /* my-weatherTests */,
 				7A8F7AA92CE0B63200B127BD /* my-weatherUITests */,
+				7A2254012CFF211500C6CA56 /* Frameworks */,
 				7A8F7A842CE0B63000B127BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,6 +143,7 @@
 				7A8F7A7F2CE0B63000B127BD /* Sources */,
 				7A8F7A802CE0B63000B127BD /* Frameworks */,
 				7A8F7A812CE0B63000B127BD /* Resources */,
+				7A2254042CFF211500C6CA56 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,6 +154,8 @@
 			);
 			name = "my-weather";
 			packageProductDependencies = (
+				7A2253FD2CFF1FE200C6CA56 /* Swinject */,
+				7A2254022CFF211500C6CA56 /* Swinject-Dynamic */,
 			);
 			productName = "weather-outfit";
 			productReference = 7A8F7A832CE0B63000B127BD /* my-weather.app */;
@@ -208,6 +239,9 @@
 			);
 			mainGroup = 7A8F7A7A2CE0B63000B127BD;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7A2253FC2CFF1FE200C6CA56 /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7A8F7A842CE0B63000B127BD /* Products */;
 			projectDirPath = "";
@@ -563,6 +597,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7A2253FC2CFF1FE200C6CA56 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7A2253FD2CFF1FE200C6CA56 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A2253FC2CFF1FE200C6CA56 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		7A2254022CFF211500C6CA56 /* Swinject-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A2253FC2CFF1FE200C6CA56 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = "Swinject-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7A8F7A7B2CE0B63000B127BD /* Project object */;
 }

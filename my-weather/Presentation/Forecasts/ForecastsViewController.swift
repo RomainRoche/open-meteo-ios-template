@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Swinject
 
 final class ForecastsViewController: UIViewController {
 
@@ -23,15 +24,19 @@ final class ForecastsViewController: UIViewController {
     
     // MARK: - Forecasts management
     
+    private var container: Container {
+        (UIApplication.shared.delegate as? AppDelegate)?.container ?? Container()
+    }
+    
     /// The use case for location
-    private let getLocation: GetLocationUseCase = GetLocation(  // ! Should be injected
-        locationRepository: CoreLocationRepository()
-    )
+    private lazy var getLocation: GetLocationUseCase = {
+        container.resolve(GetLocationUseCase.self)!
+    }()
     
     /// The use case to use to fetch forecasts data.
-    private let getForecast: GetForecastUseCase = GetForecast(  // ! Should be injected
-        weatherRepository: WeatherAPIRepository()
-    )
+    private lazy var getForecast: GetForecastUseCase = {
+        container.resolve(GetForecastUseCase.self)!
+    }()
         
     private var weatherPoints: [WeatherPoint] = []
         

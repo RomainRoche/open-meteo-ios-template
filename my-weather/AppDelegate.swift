@@ -7,13 +7,17 @@
 
 import UIKit
 import CoreData
+import Swinject
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    let container = Container()
+    
     /// This is you app entry point
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setupDependencies()
         return true
     }
 
@@ -76,4 +80,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+}
+
+extension AppDelegate {
+    
+    private func setupDependencies() {
+        container.register(GetForecastUseCase.self) { _ in
+            GetForecast(weatherRepository: WeatherAPIRepository())
+        }
+        
+        container.register(GetLocationUseCase.self) { _ in
+            GetLocation(locationRepository: CoreLocationRepository())
+        }
+    }
+    
 }
