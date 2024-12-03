@@ -30,15 +30,29 @@ final class ForecastsViewController: UIViewController {
 //    private let getForecast: GetForecastUseCase // TODO: Implement this
     
     private let weatherRepository = WeatherAPIRepository()
+    private let locationRepository = CoreLocationRepository()
+    
+    private var appDelegate: AppDelegate? {
+        UIApplication.shared.delegate as? AppDelegate
+    }
     
     private var weatherPoints: [WeatherPoint] = []
+    
+    private func getLocation() async -> Result<Coordinates, LocationError> {
+        return await withCheckedContinuation { continuation in
+            locationRepository.fetchLocation { result in
+                continuation.resume(returning: result)
+            }
+        }
+    }
     
     /// Get the weather's forecasts.
     private func getForecasts() async {
         do {
+            let coordinates = try await getLocation().get()
             let weatherPoints = try await weatherRepository.getForecast(
-                latitude: 48.86,
-                longitude: 2.35
+                latitude: coordinates.latitude,
+                longitude: coordinates.longitude
             )
             self.weatherPoints = weatherPoints
             self.forecastsTableView.reloadData()
@@ -61,6 +75,9 @@ final class ForecastsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        Task {
+            await getForecasts()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
