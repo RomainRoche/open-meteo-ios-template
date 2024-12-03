@@ -89,6 +89,7 @@ final class ForecastsViewController: UIViewController {
     
     private func setupTableView() {
         forecastsTableView.dataSource = self
+        forecastsTableView.delegate = self
     }
     
     // MARK: - Button action
@@ -100,6 +101,17 @@ final class ForecastsViewController: UIViewController {
         }
     }
 
+}
+
+extension ForecastsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .red
+        self.navigationController?.pushViewController(viewController, animated: true)
+        print(indexPath.row)
+    }
+    
 }
 
 extension ForecastsViewController: UITableViewDataSource {
