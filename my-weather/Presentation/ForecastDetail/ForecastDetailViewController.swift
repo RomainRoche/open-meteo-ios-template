@@ -10,8 +10,8 @@ import SwiftUI
 
 class ForecastDetailViewController: UIHostingController<ForecastDetailView> {
 
-    init() {
-        super.init(rootView: ForecastDetailView())
+    init(with points: [WeatherPoint]) {
+        super.init(rootView: ForecastDetailView(with: points))
     }
     
     @MainActor @preconcurrency required dynamic init?(coder aDecoder: NSCoder) {

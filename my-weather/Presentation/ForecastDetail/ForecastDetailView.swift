@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct ForecastDetailView: View {
-        
+      
+    private let points: [WeatherPoint]
+    
+    init(with points: [WeatherPoint]) {
+        self.points = points
+    }
+    
     var body: some View {
         Text("Hello World")
     }
@@ -16,5 +22,18 @@ struct ForecastDetailView: View {
 }
 
 #Preview {
-    ForecastDetailViewController()
+    ForecastDetailView(with: WeatherPoint.mocks)
+}
+
+extension Date {
+    
+    func isSameDay(as other: Date) -> Bool {
+        Calendar.current
+            .isDate(
+                self,
+                equalTo: other,
+                toGranularity: .day
+            )
+    }
+    
 }

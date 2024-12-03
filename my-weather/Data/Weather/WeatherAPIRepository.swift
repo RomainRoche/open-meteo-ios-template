@@ -15,7 +15,7 @@ final class WeatherAPIRepository: WeatherRepository {
     
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
         return dateFormatter
     }()
     
