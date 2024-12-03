@@ -15,7 +15,6 @@ final class ForecastsViewController: UIViewController {
     @IBOutlet private var refreshButton: UIButton!
     @IBOutlet private var forecastsTableView: UITableView!
     
-    private var weatherItems: [WeatherUIItem] = []
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "eee dd MMM, hh:mm a"
@@ -106,8 +105,7 @@ final class ForecastsViewController: UIViewController {
 extension ForecastsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .red
+        let viewController = ForecastDetailViewController(with: weatherPoints)
         self.navigationController?.pushViewController(viewController, animated: true)
         print(indexPath.row)
     }

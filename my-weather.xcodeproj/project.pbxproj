@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7A2253FE2CFF1FE200C6CA56 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 7A2253FD2CFF1FE200C6CA56 /* Swinject */; };
-		7A2254052CFF211500C6CA56 /* Swinject-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7A2254022CFF211500C6CA56 /* Swinject-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +34,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7A2254052CFF211500C6CA56 /* Swinject-Dynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
