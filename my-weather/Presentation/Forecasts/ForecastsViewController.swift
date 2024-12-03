@@ -40,6 +40,7 @@ final class ForecastsViewController: UIViewController {
         do {
             // .get(): returns result if Result is a success, otherwise throw error
             let coordinates = try await getLocation.execute().get()
+            
             let weatherPoints = try await getForecast.execute(for: coordinates).get()
             self.weatherPoints = weatherPoints
             self.forecastsTableView.reloadData()
